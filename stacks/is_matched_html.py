@@ -1,25 +1,26 @@
 from array_stack import ArrayStack
 
+
 def is_matched_html(raw):
-  Stack = ArrayStack()
-  
-  tag_start_pointer = raw.find('<')
+    Stack = ArrayStack()
 
-  while tag_start_pointer != -1:
-    tag_end_pointer = raw.find('>', tag_start_pointer + 1)
-    if tag_end_pointer == -1:
-      return False
-    tag = raw[tag_start_pointer + 1:tag_end_pointer]
-    if not tag.startswith('/'):
-      Stack.push(tag)
-    else:
-      if Stack.is_empty():
-        return False
-      if tag[1:] != Stack.pop():
-        return False
-    tag_start_pointer = raw.find('<', tag_end_pointer + 1)
+    tag_start_pointer = raw.find('<')
 
-  return Stack.is_empty()
+    while tag_start_pointer != -1:
+        tag_end_pointer = raw.find('>', tag_start_pointer + 1)
+        if tag_end_pointer == -1:
+            return False
+        tag = raw[tag_start_pointer + 1:tag_end_pointer]
+        if not tag.startswith('/'):
+            Stack.push(tag)
+        else:
+            if Stack.is_empty():
+                return False
+            if tag[1:] != Stack.pop():
+                return False
+        tag_start_pointer = raw.find('<', tag_end_pointer + 1)
+
+    return Stack.is_empty()
 
 
 raw_html = """
