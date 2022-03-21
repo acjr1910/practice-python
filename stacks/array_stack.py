@@ -1,5 +1,4 @@
-class Empty(Exception):
-    pass
+from utils.exceptions import Empty
 
 
 class ArrayStack:
