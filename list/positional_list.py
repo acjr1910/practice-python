@@ -86,3 +86,14 @@ class PositionalList(DoublyLinkedBase):
         old_value = original._element
         original._element = e
         return old_value
+
+
+L = PositionalList()
+L.add_last(10)
+pos = L.add_last(20)
+L.add_last(30)
+L.add_first(40)
+L.add_after(pos, 60)
+
+for pos in L:
+  print(pos)
