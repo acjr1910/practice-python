@@ -1,84 +1,88 @@
-from linked_list.doubly_linked_base import _DoublyLinkedBase
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..')) 
+from linked_list.doubly_linked_base import DoublyLinkedBase
 
 
-class PositionalList(_DoublyLinkedBase):
-  class Position:
-      def __init__(self, container, node):
-          self._container = container
-          self._node = node
+class PositionalList(DoublyLinkedBase):
+    class Position:
+        def __init__(self, container, node):
+            self._container = container
+            self._node = node
 
-      def element(self):
-          return self._node._element
+        def element(self):
+            return self._node._element
 
-      def __eq__(self, other):
-          return type(other) is type(self) and other._node is self._node
+        def __eq__(self, other):
+            return type(other) is type(self) and other._node is self._node
 
-      def __ne__(self, other):
-          return not(self == other)
+        def __ne__(self, other):
+            return not(self == other)
 
-  #------------- utility method ----------------
-  def _validate(self, p):
-    if not isinstance(p, self.Position):
-      raise TypeError('p must be proper Position type')
-    if p._container is not self:
-      raise ValueError('p does not belong to this container')
-    if p._node._next is None:
-      raise ValueError('p is no longer valid')
-    return p._node
-  
-  #------------- utility method ----------------
-  def _make_position(self, node):
-    if node is self._header or node is self._trailer:
-      return None
-    else:
-      return self.Position(self, node)
+    # ------------- utility method ----------------
+    def _validate(self, p):
+        if not isinstance(p, self.Position):
+            raise TypeError('p must be proper Position type')
+        if p._container is not self:
+            raise ValueError('p does not belong to this container')
+        if p._node._next is None:
+            raise ValueError('p is no longer valid')
+        return p._node
 
-  #------------- accessors ----------------
-  def first(self):
-    return self._make_position(self._header._next)
+    # ------------- utility method ----------------
+    def _make_position(self, node):
+        if node is self._header or node is self._trailer:
+            return None
+        else:
+            return self.Position(self, node)
 
-  def last(self):
-    return self._make_position(self._trailer._prev)
+    # ------------- accessors ----------------
+    def first(self):
+        return self._make_position(self._header._next)
 
-  def before(self, p):
-    node = self._validate(p)
-    return self._make_position(node._prev)
-    
-  def after(self, p):
-    node = self._validate(p)
-    return self._make_position(node._next)
+    def last(self):
+        return self._make_position(self._trailer._prev)
 
-  def __iter__(self):
-    cursor = self.first()
-    while cursor is not None:
-      yield cursor.element()
-      cursor = self.after(cursor)
+    def before(self, p):
+        node = self._validate(p)
+        return self._make_position(node._prev)
 
-  #------------- mutators ----------------
-  def _insert_between(self, e, predecessor, successor):
-      node = super()._insert_between(e, predecessor, successor)
-      return self._make_position(node)
+    def after(self, p):
+        node = self._validate(p)
+        return self._make_position(node._next)
 
-  def add_first(self, e):
-      return self._insert_between(e, self._header, self._header._next)
+    def __iter__(self):
+        cursor = self.first()
+        while cursor is not None:
+            yield cursor.element()
+            cursor = self.after(cursor)
 
-  def add_last(self, e):
-      return self._insert_between(e, self._trailer._prev, self._trailer)
+    # ------------- mutators ----------------
+    def _insert_between(self, e, predecessor, successor):
+        node = super()._insert_between(e, predecessor, successor)
+        return self._make_position(node)
 
-  def add_before(self, p, e):
-      original = self._validate(p)
-      return self._insert_between(e, original._prev, original)
+    def add_first(self, e):
+        return self._insert_between(e, self._header, self._header._next)
 
-  def add_after(self, p, e):
-      original = self._validate(p)
-      return self._insert_between(e, original, original._next)
+    def add_last(self, e):
+        return self._insert_between(e, self._trailer._prev, self._trailer)
 
-  def delete(self, p):
-      original = self._validate(p)
-      return self._delete_node(original)
+    def add_before(self, p, e):
+        original = self._validate(p)
+        return self._insert_between(e, original._prev, original)
 
-  def replace(self, p, e):
-      original = self._validate(p)
-      old_value = original._element
-      original._element = e
-      return old_value
+    def add_after(self, p, e):
+        original = self._validate(p)
+        return self._insert_between(e, original, original._next)
+
+    def delete(self, p):
+        original = self._validate(p)
+        return self._delete_node(original)
+
+    def replace(self, p, e):
+        original = self._validate(p)
+        old_value = original._element
+        original._element = e
+        return old_value

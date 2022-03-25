@@ -1,7 +1,7 @@
 from utils.nodes import Doubly_Node
 
 
-class _DoublyLinkedBase:
+class DoublyLinkedBase:
     def __init__(self):
         self._header = Doubly_Node(None, None, None)
         self._trailer = Doubly_Node(None, None, None)
