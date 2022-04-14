@@ -1,11 +1,7 @@
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..')) 
-from linked_list.doubly_linked_base import DoublyLinkedBase
+import doubly_linked_base
 
 
-class PositionalList(DoublyLinkedBase):
+class PositionalList(doubly_linked_base.DoublyLinkedBase):
     class Position:
         def __init__(self, container, node):
             self._container = container
@@ -96,4 +92,4 @@ L.add_first(40)
 L.add_after(pos, 60)
 
 for pos in L:
-  print(pos)
+    print(pos)

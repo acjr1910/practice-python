@@ -1,10 +1,10 @@
-from utils.nodes import Doubly_Node
+import nodes
 
 
 class DoublyLinkedBase:
     def __init__(self):
-        self._header = Doubly_Node(None, None, None)
-        self._trailer = Doubly_Node(None, None, None)
+        self._header = nodes.Doubly_Node(None, None, None)
+        self._trailer = nodes.Doubly_Node(None, None, None)
         self._header._next = self._trailer
         self._trailer._prev = self._header
         self._size = 0
@@ -16,7 +16,7 @@ class DoublyLinkedBase:
         return self._size == 0
 
     def _insert_between(self, e, predecessor, successor):
-        newest = Doubly_Node(e, predecessor, successor)
+        newest = nodes.Doubly_Node(e, predecessor, successor)
         predecessor._next = newest
         successor._prev = newest
         self._size += 1

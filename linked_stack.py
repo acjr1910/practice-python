@@ -1,5 +1,5 @@
-from utils.nodes import Singly_Node
-from utils.exceptions import Empty
+from nodes import Singly_Node
+from exceptions import Empty
 
 
 class LinkedStack:
