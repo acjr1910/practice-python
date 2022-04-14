@@ -1,5 +1,5 @@
-import nodes
-import exceptions
+from nodes import Singly_Node
+from exceptions import Empty
 
 
 class CircularQueue:
@@ -15,13 +15,13 @@ class CircularQueue:
 
     def first(self):
         if self.is_empty():
-            raise exceptions.Empty('Queue is empty')
+            raise Empty('Queue is empty')
         head = self._tail._next
         return head._element
 
     def dequeue(self):
         if self.is_empty():
-            raise exceptions.Empty('Queue is empty')
+            raise Empty('Queue is empty')
         oldhead = self._tail._next
         if self._size == 1:
             self._tail = None
@@ -31,7 +31,7 @@ class CircularQueue:
         return oldhead._element
 
     def enqueue(self, e):
-        newest = nodes.Singly_Node(e, None)
+        newest = Singly_Node(e, None)
         if self.is_empty():
             newest._next = newest
         else:

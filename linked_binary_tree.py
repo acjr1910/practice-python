@@ -1,8 +1,8 @@
-import nodes
-import binary_tree
+from nodes import BinaryTreeNode
+from binary_tree import BinaryTree
 
 
-class LinkedBinaryTree(binary_tree.BinaryTree):
+class LinkedBinaryTree(BinaryTree):
     class Position(BinaryTree.Position):
         def __init__(self, container, node):
             self._container = container
@@ -61,7 +61,7 @@ class LinkedBinaryTree(binary_tree.BinaryTree):
         if self._root is not None:
             raise ValueError('Root exists')
         self._size = 1
-        self._root = nodes.BinaryTreeNode(e)
+        self._root = BinaryTreeNode(e)
         return self._make_position(self._root)
 
     def _add_left(self, p, e):
@@ -69,7 +69,7 @@ class LinkedBinaryTree(binary_tree.BinaryTree):
         if node._left is not None:
             raise ValueError('Left child exists')
         self._size += 1
-        node._left = nodes.BinaryTreeNode(e, node)
+        node._left = BinaryTreeNode(e, node)
         return self._make_position(node._left)
 
     def _add_right(self, p, e):
@@ -77,7 +77,7 @@ class LinkedBinaryTree(binary_tree.BinaryTree):
         if node._right is not None:
             raise ValueError('Right child exists')
         self._size += 1
-        node._right = nodes.BinaryTreeNode(e, node)
+        node._right = BinaryTreeNode(e, node)
         return self._make_position(node._right)
 
     def _replace(self, p, e):

@@ -1,16 +1,16 @@
-from doubly_linked_base import _DoublyLinkedBase
-import exceptions
+from doubly_linked_base import DoublyLinkedBase
+from exceptions import Empty
 
 
-class LinkedDeque(_DoublyLinkedBase):
+class LinkedDeque(DoublyLinkedBase):
     def first(self):
         if self.is_empty():
-            raise exceptions.Empty('Deque is empty')
+            raise Empty('Deque is empty')
         return self._header._next._element
 
     def last(self):
         if self.is_empty():
-            raise exceptions.Empty('Deque is empty')
+            raise Empty('Deque is empty')
         return self._trailer._prev._element
 
     def insert_first(self, e):
@@ -21,10 +21,10 @@ class LinkedDeque(_DoublyLinkedBase):
 
     def delete_first(self):
         if self.is_empty():
-            raise exceptions.Empty('Deque is empty')
+            raise Empty('Deque is empty')
         return self._delete_node(self._header._next)
 
     def delete_last(self):
         if self.is_empty():
-            raise exceptions.Empty('Deque is empty')
+            raise Empty('Deque is empty')
         return self._delete_node(self._trailer._prev)

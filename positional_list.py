@@ -1,7 +1,7 @@
-import doubly_linked_base
+from doubly_linked_base import DoublyLinkedBase
 
 
-class PositionalList(doubly_linked_base.DoublyLinkedBase):
+class PositionalList(DoublyLinkedBase):
     class Position:
         def __init__(self, container, node):
             self._container = container
