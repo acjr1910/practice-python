@@ -23,3 +23,19 @@ class BinaryTree(Tree):
             yield self.left(p)
         if self.right(p) is not None:
             yield self.right(p)
+
+    def bfs(self):
+        """Breadth First Search"""
+        return NotImplementedError('TODO: implement this')
+
+    def dfs_pre_order(self):
+        """Depth First Search"""
+        return NotImplementedError('TODO: implement this')
+
+    def dfs_post_order(self):
+        """Depth First Search"""
+        return NotImplementedError('TODO: implement this')
+
+    def dfs_in_order(self):
+        """Depth First Search"""
+        return NotImplementedError('TODO: implement this')
