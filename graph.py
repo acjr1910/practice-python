@@ -25,23 +25,36 @@ class Graph():
             self.remove_edge(vertex, v)
         del self.adjacency_list[vertex]
 
+    def depth_first_search(self, vertex):
+        edges = []
+        visited = {}
+
+        def helper(vertex):
+            visited[vertex] = True
+            edges.append(vertex)
+            for neighbor in self.adjacency_list[vertex]:
+                if neighbor not in visited:
+                    helper(neighbor)
+        helper(vertex)
+
+        return edges
+
 
 graph = Graph()
 
-graph.add_vertex('porto')
-graph.add_vertex('tokyo')
-graph.add_vertex('porto')  # checks collision
-graph.add_vertex('aspen')
-graph.add_vertex('berlim')
+graph.add_vertex('A')
+graph.add_vertex('B')
+graph.add_vertex('C')
+graph.add_vertex('D')
+graph.add_vertex('E')
+graph.add_vertex('F')
 
-graph.add_edge('porto', 'tokyo')
-graph.add_edge('porto', 'aspen')
-graph.add_edge('porto', 'berlim')
+graph.add_edge('A', 'B')
+graph.add_edge('A', 'C')
+graph.add_edge('B', 'D')
+graph.add_edge('C', 'E')
+graph.add_edge('D', 'E')
+graph.add_edge('D', 'F')
+graph.add_edge('E', 'F')
 
-graph.add_edge('tokyo', 'berlim')
-graph.add_edge('tokyo', 'aspen')
-
-print(graph.adjacency_list)
-
-graph.remove_vertex('porto')
-print(graph.adjacency_list)
+print(graph.depth_first_search("A"))
