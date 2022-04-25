@@ -1,3 +1,6 @@
+import queue
+
+
 class Graph():
     def __init__(self):
         self.adjacency_list = {}
@@ -39,6 +42,23 @@ class Graph():
 
         return edges
 
+    def breadth_first_search(self, vertex):
+        queue = [vertex]
+        edges = []
+        visited = {}
+        currentVertex = None
+        visited[vertex] = True
+
+        while len(queue):
+            currentVertex = queue.pop(0)
+            edges.append(currentVertex)
+            for neighbor in self.adjacency_list[currentVertex]:
+                if neighbor not in visited:
+                    visited[neighbor] = True
+                    queue.append(neighbor)
+
+        return edges
+
 
 graph = Graph()
 
@@ -57,4 +77,5 @@ graph.add_edge('D', 'E')
 graph.add_edge('D', 'F')
 graph.add_edge('E', 'F')
 
-print(graph.depth_first_search("A"))
+print('Depth First Search:', graph.depth_first_search("A"))
+print('Breadth First Search:', graph.breadth_first_search("A"))
