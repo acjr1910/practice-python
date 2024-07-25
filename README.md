@@ -2,5 +2,5 @@
 
 ### Contents
 
-[Data Structures and Algorithms](./DSA)
-[Pratical Python](./pratical-pyton/)
+- [Pratical Python](./pratical-pyton/)
+- [Data Structures and Algorithms](./DSA)
